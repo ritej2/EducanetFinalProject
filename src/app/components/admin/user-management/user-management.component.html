@@ -1,0 +1,153 @@
+<div class="admin-container">
+    <div class="search-container">
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" [(ngModel)]="searchTerm" (input)="onSearch()" placeholder="Rechercher un utilisateur...">
+        </div>
+        <button class="btn-primary add-user-btn" (click)="showAddUserForm()">
+            <i class="fas fa-plus"></i> Ajouter un utilisateur
+        </button>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="content-card list-section">
+            <div class="card-header">
+                <h2>Liste des utilisateurs</h2>
+            </div>
+            <div class="user-list">
+                <div class="user-item" *ngFor="let user of filteredUsers" [class.active]="selectedUserId === user.id"
+                    (click)="viewDetails(user.id)" [class.inactive]="!user.is_active">
+                    <div class="user-main-info">
+                        <div class="user-name">{{ user.name }} <span class="badge-role">{{ user.role }}</span></div>
+                        <div class="user-email">{{ user.email }}</div>
+                        <div class="user-meta">
+                            <span><i class="far fa-clock"></i> {{ user.children_count || 0 }} enfant(s)</span>
+                            <span><i class="far fa-comment-alt"></i> {{ user.conversations_count || 0 }}
+                                conversation(s)</span>
+                        </div>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn-action status" [title]="user.is_active ? 'Désactiver' : 'Activer'"
+                            (click)="toggleStatus(user, $event)">
+                            <i class="fas" [class.fa-toggle-on]="user.is_active" [class.fa-toggle-off]="!user.is_active"
+                                [style.color]="user.is_active ? '#4CAF50' : '#f44336'"></i>
+                        </button>
+                        <button class="btn-action view" (click)="viewDetails(user.id); $event.stopPropagation()">
+                            <i class="far fa-eye"></i>
+                        </button>
+                        <button class="btn-action delete"
+                            (click)="deleteUser(user.id, $event); $event.stopPropagation()">
+                            <i class="far fa-trash-alt"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card details-section">
+            <div class="card-header">
+                <h2>{{ isAddingUser ? 'Ajouter un utilisateur' : 'Détails de l\'utilisateur' }}</h2>
+            </div>
+
+            <!-- Placeholder quand rien n'est sélectionné -->
+            <div class="details-placeholder" *ngIf="!selectedUser && !isAddingUser && !loadingDetails">
+                <i class="fas fa-user-plus icon-placeholder" (click)="showAddUserForm()"></i>
+                <p>Sélectionnez un utilisateur pour voir ses détails ou</p>
+                <button class="btn-secondary" (click)="showAddUserForm()">Ajouter un nouveau parent</button>
+            </div>
+
+            <div class="loader-container" *ngIf="loadingDetails">
+                <div class="spinner"></div>
+            </div>
+
+            <!-- Vue : Détails Utilisateur -->
+            <div class="user-details" *ngIf="selectedUser && !loadingDetails && !isAddingUser">
+                <section class="details-group">
+                    <h3>Informations personnelles</h3>
+
+                    <div class="info-item">
+                        <label>Nom :</label>
+                        <div class="info-value">{{ selectedUser.profile.name }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Email :</label>
+                        <div class="info-value">{{ selectedUser.profile.email }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Téléphone :</label>
+                        <div class="info-value">{{ selectedUser.profile.phone || 'Non renseigné' }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Date d'inscription :</label>
+                        <div class="info-value">{{ selectedUser.profile.created_at | date:'dd/MM/yyyy' }}</div>
+                    </div>
+
+                    <div class="info-item">
+                        <label>Statut :</label>
+                        <div class="info-value">
+                            <span class="status- badge" [class.active-status]="selectedUser.profile.is_active"
+                                [class.inactive-status]="!selectedUser.profile.is_active">
+                                {{ selectedUser.profile.is_active ? 'Actif' : 'Inactif' }}
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="details-group" *ngIf="selectedUser.children.length">
+                    <h3>Enfants ({{ selectedUser.children.length }})</h3>
+                    <div class="children-tags">
+                        <span class="child-tag" *ngFor="let child of selectedUser.children">
+                            {{ child.first_name }} ({{ child.birth_date | date:'yyyy' }})
+                        </span>
+                    </div>
+                </section>
+
+                <div class="panel-actions">
+                    <button class="btn-action delete-large" (click)="deleteUser(selectedUser.profile.id, $event)">
+                        <i class="far fa-trash-alt"></i> Supprimer ce compte
+                    </button>
+                </div>
+            </div>
+
+            <!-- Vue : Ajouter Utilisateur (Formulaire intégré) -->
+            <div class="add-user-form" *ngIf="isAddingUser">
+                <form (submit)="handleAddUser()">
+                    <div class="form-group">
+                        <label>Nom complet</label>
+                        <input type="text" [(ngModel)]="newUser.name" name="name" required
+                            placeholder="Ex: Jean Dupont">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" [(ngModel)]="newUser.email" name="email" required
+                            placeholder="email@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label>Mot de passe</label>
+                        <input type="password" [(ngModel)]="newUser.password" name="password" required
+                            placeholder="Minimum 6 caractères">
+                    </div>
+                    <div class="form-group">
+                        <label>Téléphone</label>
+                        <input type="text" [(ngModel)]="newUser.phone" name="phone" placeholder="06XXXXXXXX">
+                    </div>
+                    <div class="form-group">
+                        <label>Rôle</label>
+                        <select [(ngModel)]="newUser.role" name="role">
+                            <option value="user">Parent (Utilisateur)</option>
+                            <option value="admin">Administrateur</option>
+                        </select>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary" (click)="cancelAddUser()">Annuler</button>
+                        <button type="submit" class="btn-primary">Créer le compte</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

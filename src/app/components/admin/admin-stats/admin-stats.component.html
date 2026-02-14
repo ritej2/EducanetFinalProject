@@ -1,0 +1,37 @@
+<div class="stats-grid">
+    <!-- Card Users -->
+    <div class="stat-card">
+        <div class="stat-content">
+            <h3>Total Utilisateurs</h3>
+            <div class="value" *ngIf="!loading">{{ stats?.users || 0 }}</div>
+            <div class="loader" *ngIf="loading">...</div>
+        </div>
+        <div class="icon-wrapper violet">
+            <i class="fas fa-users"></i>
+        </div>
+    </div>
+
+    <!-- Card Children -->
+    <div class="stat-card">
+        <div class="stat-content">
+            <h3>Total Enfants</h3>
+            <div class="value" *ngIf="!loading">{{ stats?.children || 0 }}</div>
+            <div class="loader" *ngIf="loading">...</div>
+        </div>
+        <div class="icon-wrapper blue">
+            <i class="fas fa-baby"></i>
+        </div>
+    </div>
+
+    <!-- Card Conversations -->
+    <div class="stat-card">
+        <div class="stat-content">
+            <h3>Conversations</h3>
+            <div class="value" *ngIf="!loading">{{ stats?.conversations || 0 }}</div>
+            <div class="loader" *ngIf="loading">...</div>
+        </div>
+        <div class="icon-wrapper green">
+            <i class="fas fa-comments"></i>
+        </div>
+    </div>
+</div>

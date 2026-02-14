@@ -1,0 +1,84 @@
+<div class="page-header">
+    <h1 class="page-title">{{ isEditMode ? 'Modifier les informations' : 'Ajouter un enfant' }}</h1>
+</div>
+
+<div class="card" style="max-width: 600px; margin: 0 auto; cursor: default;">
+    <form #childForm="ngForm" (ngSubmit)="submitForm(childForm)" novalidate>
+
+        <div class="form-group">
+            <label for="firstName">Prénom *</label>
+            <input type="text" id="firstName" name="firstName" class="form-control" [(ngModel)]="child.firstName"
+                #firstName="ngModel" [ngClass]="{ 'input-error': firstName.invalid && firstName.touched }" required
+                minlength="2" maxlength="50">
+            <div class="error-msg" *ngIf="firstName.touched && firstName.errors?.['required']">
+                Le prénom est requis.
+            </div>
+            <div class="error-msg" *ngIf="firstName.errors?.['minlength']">
+                Le prénom doit contenir au moins 2 caractères.
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="lastName">Nom</label>
+            <input type="text" id="lastName" name="lastName" class="form-control" [(ngModel)]="child.lastName"
+                minlength="2" maxlength="50">
+        </div>
+
+        
+        <div class="form-group">
+            <label for="schoolYear">Niveau scolaire</label>
+            <input type="text" id="schoolYear" name="schoolYear" class="form-control" [(ngModel)]="child.schoolYear"
+                placeholder="Ex: CP, 6ème, ...">
+        </div>
+
+        
+        <div class="form-group">
+            <label for="schoolName">Nom de l'établissement scolaire</label>
+            <input type="text" id="schoolName" name="schoolName" class="form-control" [(ngModel)]="child.schoolName">
+        </div>
+
+        <div class="form-group">
+            <label for="address">Adresse</label>
+            <textarea id="address" name="address" class="form-control" [(ngModel)]="child.address" rows="2"></textarea>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="birthDate">Date de naissance *</label>
+            <input type="date" id="birthDate" name="birthDate" class="form-control" [(ngModel)]="child.birthDate"
+                #birthDate="ngModel" (change)="validateDate()"
+                [ngClass]="{ 'input-error': (birthDate.invalid && birthDate.touched) || futureDateError }" required>
+            <div class="error-msg" *ngIf="birthDate.touched && birthDate.errors?.['required']">
+                La date de naissance est requise.
+            </div>
+            <div class="error-msg" *ngIf="futureDateError">
+                La date ne peut pas être dans le futur.
+            </div>
+        </div>
+
+        
+        <div class="form-group">
+            <label for="gender">Genre *</label>
+            <select id="gender" name="gender" class="form-control" [(ngModel)]="child.gender" required>
+                <option value="garçon">Garçon</option>
+                <option value="fille">Fille</option>
+                <option value="other">Autre</option>
+            </select>
+        </div>
+
+        
+        <button type="submit" class="btn btn-primary" [disabled]="childForm.invalid || isSubmitting || futureDateError">
+            <span *ngIf="!isSubmitting">{{ isEditMode ? 'Enregistrer' : 'Ajouter' }}</span>
+            <span *ngIf="isSubmitting"><i class="fa fa-spinner fa-spin"></i> {{ isEditMode ? 'Enregistrement...' :
+                'Ajout en cours...' }}</span>
+        </button>
+
+     
+        <div *ngIf="successMessage" class="success-msg"
+            style="margin-top: 15px; color: var(--success-green); font-weight: bold;">
+            <i class="fa fa-check-circle"></i> {{ successMessage }}
+        </div>
+
+    </form>
+</div>

@@ -1,0 +1,39 @@
+<div class="auth-container">
+    <div class="auth-card">
+        <div class="auth-header">
+            <i class="fa fa-heart"></i>
+            <h1>Mon Espace Parent</h1>
+            <p>Connectez-vous à votre compte</p>
+        </div>
+
+        <form (ngSubmit)="onSubmit()" class="auth-form">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="votre@email.com"
+                    [disabled]="isLoading" required />
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="••••••••"
+                    [disabled]="isLoading" required />
+            </div>
+
+            <div class="error-message" *ngIf="errorMessage">
+                <i class="fa fa-exclamation-circle"></i>
+                {{ errorMessage }}
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="isLoading">
+                <span *ngIf="!isLoading">Se connecter</span>
+                <span *ngIf="isLoading">
+                    <i class="fa fa-spinner fa-spin"></i> Connexion...
+                </span>
+            </button>
+        </form>
+
+        <div class="auth-footer">
+            <p>Pas encore de compte ? <a routerLink="/signup">S'inscrire</a></p>
+        </div>
+    </div>
+</div>

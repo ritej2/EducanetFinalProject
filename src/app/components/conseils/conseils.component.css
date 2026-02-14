@@ -1,0 +1,217 @@
+/* Existing animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 20px, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+.conseils-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 3rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(91, 58, 140, 0.1);
+}
+
+.header-text h1 {
+    font-size: 2.5rem;
+    background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 0.5rem;
+}
+
+.btn-add-tip {
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+    transition: all 0.3s ease;
+}
+
+.btn-add-tip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(168, 85, 247, 0.4);
+    opacity: 0.95;
+}
+
+/* Tips Filter */
+.tips-filter-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.filter-btn {
+    padding: 8px 20px;
+    border-radius: 50px;
+    border: 1px solid #e2e8f0;
+    background: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.filter-btn.active {
+    background: var(--primary-purple);
+    color: white;
+    box-shadow: 0 4px 10px rgba(91, 58, 140, 0.2);
+}
+
+/* Tip Card */
+.tip-card-container {
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    height: 100%;
+    position: relative;
+    transition: transform 0.3s;
+}
+
+.tip-card-container:hover {
+    transform: translateY(-5px);
+}
+
+.tip-icon-container {
+    width: 60px;
+    height: 60px;
+    border-radius: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+/* Admin Actions */
+.tip-admin-actions {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    display: flex;
+    gap: 5px;
+}
+
+.action-btn {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.action-btn.edit {
+    background: #4a90e2;
+}
+
+.action-btn.delete {
+    background: #ef4444;
+}
+
+/* Modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+}
+
+.admin-modal {
+    background: white;
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+    margin: 0;
+    color: var(--primary-purple);
+}
+
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+/* Gradients */
+.gradient-sante-1 {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+}
+
+.gradient-sante-2 {
+    background: linear-gradient(135deg, #4facfe, #00f2fe);
+}
+
+.gradient-alim-1 {
+    background: linear-gradient(135deg, #66BB6A, #43A047);
+}
+
+.gradient-alim-2 {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+}
+
+.gradient-sommeil {
+    background: linear-gradient(135deg, #5c258d, #4389a2);
+}
+
+.gradient-educ-1 {
+    background: linear-gradient(135deg, #f6d365, #fda085);
+}
+
+.gradient-educ-2 {
+    background: linear-gradient(135deg, #84fab0, #8fd3f4);
+}
+
+.gradient-dev {
+    background: linear-gradient(135deg, #fa709a, #fee140);
+}
+
+.gradient-secu {
+    background: linear-gradient(135deg, #2af598, #009efd);
+}

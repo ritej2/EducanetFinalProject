@@ -1,0 +1,374 @@
+<div class="container mt-4 pb-5">
+    <div class="header-actions mb-4 d-flex justify-content-between align-items-center">
+        <h1 class="page-title mb-0">
+            <span [class.hidden]="currentLang !== 'fr'">Évaluation de l'Enfant</span>
+            <span [class.hidden]="currentLang !== 'ar'">تقييم الطفل</span>
+        </h1>
+        <button class="btn btn-outline-secondary pill-btn" (click)="toggleLanguage()">
+            <i class="fa fa-language"></i> {{ currentLang === 'fr' ? 'العربية' : 'Français' }}
+        </button>
+    </div>
+
+    <!-- Status Bar -->
+    <div class="status-bar-container mb-4">
+        <div class="status-item section-count">
+            <span class="label">Section</span>
+            <span class="value">{{currentStep}}/{{totalSteps}}</span>
+        </div>
+        <div class="status-item active-part">
+            <span class="label">Partie:</span>
+            <span class="value">
+                <ng-container [ngSwitch]="currentStep">
+                    <span *ngSwitchCase="1">{{currentLang === 'fr' ? 'Informations de Base' : 'معلومات أساسية'}}</span>
+                    <span *ngSwitchCase="2">{{currentLang === 'fr' ? 'Résultats Scolaires' : 'النتائج المدرسية'}}</span>
+                    <span *ngSwitchCase="3">{{currentLang === 'fr' ? 'Comportement' : 'السلوك'}}</span>
+                    <span *ngSwitchCase="4">{{currentLang === 'fr' ? 'Biographie & Famille' : 'السيرة والسياق
+                        العائلي'}}</span>
+                </ng-container>
+            </span>
+        </div>
+        <div class="status-item questions-answered">
+            <span class="label">Questions répondues:</span>
+            <span class="value">{{getAnsweredCount()}}/{{getTotalQuestions()}}</span>
+        </div>
+    </div>
+
+    <form (ngSubmit)="onSubmit()" #questionnaireForm="ngForm">
+
+        <!-- Step 1: Informations de Base -->
+        <div class="step-content" *ngIf="currentStep === 1">
+            <div class="card section shadow-sm border-0 mb-4">
+                <div class="section-header">
+                    <div class="section-number">1</div>
+                    <h2 class="section-title">
+                        <span [class.hidden]="currentLang !== 'fr'">Informations de Base</span>
+                        <span [class.hidden]="currentLang !== 'ar'">معلومات أساسية</span>
+                    </h2>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Nom de l'enfant</span>
+                            <span [class.hidden]="currentLang !== 'ar'">اسم الطفل</span>
+                        </label>
+                        <input type="text" name="q_nom" [(ngModel)]="formData.q_nom" required
+                            [placeholder]="currentLang === 'fr' ? 'Ex: Ahmed' : 'مثال: أحمد'"
+                            class="form-control premium-input">
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Âge</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العمر</span>
+                        </label>
+                        <input type="number" name="q_age" [(ngModel)]="formData.q_age" min="5" max="15"
+                            class="form-control premium-input">
+                        <small class="text-muted">5-15 ans</small>
+                    </div>
+                    <div class="col-md-3 mb-3">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Niveau</span>
+                            <span [class.hidden]="currentLang !== 'ar'">المستوى</span>
+                        </label>
+                        <select name="q_niveau" [(ngModel)]="formData.q_niveau" class="form-select premium-input">
+                            <option value="">--</option>
+                            <option value="0">Maternelle</option>
+                            <option value="1">1ère année</option>
+                            <option value="2">2ème année</option>
+                            <option value="3">3ème année</option>
+                            <option value="4">4ème année</option>
+                            <option value="5">5ème année</option>
+                            <option value="6">6ème année</option>
+                            <option value="7">7ème année</option>
+                            <option value="8">8ème année</option>
+                            <option value="9">9ème année</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 2: Section 1 – Résultats scolaires -->
+        <div class="step-content" *ngIf="currentStep === 2">
+            <div class="card section shadow-sm border-0 mb-4" id="section1">
+                <div class="section-header">
+                    <div class="section-number">2</div>
+                    <h2 class="section-title">
+                        <span [class.hidden]="currentLang !== 'fr'">Résultats scolaires</span>
+                        <span [class.hidden]="currentLang !== 'ar'">النتائج المدرسية</span>
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Moyenne générale</span>
+                            <span [class.hidden]="currentLang !== 'ar'">المعدل العام</span>
+                        </label>
+                        <input type="number" name="q_moyenne" [(ngModel)]="formData.q_moyenne" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en mathématiques</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في الرياضيات</span>
+                        </label>
+                        <input type="number" name="q_math" [(ngModel)]="formData.q_math" min="0" max="20" step="0.5"
+                            class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en lecture arabe</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في مادة القراءة العربية</span>
+                        </label>
+                        <input type="number" name="q_lecture_ar" [(ngModel)]="formData.q_lecture_ar" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en production écrite arabe</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في مادة الإنتاج الكتابي العربية</span>
+                        </label>
+                        <input type="number" name="q_prod_ar" [(ngModel)]="formData.q_prod_ar" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en éveil scientifique</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في الإيقاظ العلمي</span>
+                        </label>
+                        <input type="number" name="q_science" [(ngModel)]="formData.q_science" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en dessin / musique</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في التربية التشكيلية / الموسيقية</span>
+                        </label>
+                        <input type="number" name="q_dessin_musique" [(ngModel)]="formData.q_dessin_musique" min="0"
+                            max="20" step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en éducation physique</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في التربية البدنية</span>
+                        </label>
+                        <input type="number" name="q_eps" [(ngModel)]="formData.q_eps" min="0" max="20" step="0.5"
+                            class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en lecture français</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في مادة القراءة الفرنسية</span>
+                        </label>
+                        <input type="number" name="q_lecture_fr" [(ngModel)]="formData.q_lecture_fr" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en production écrite français</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في مادة الإنتاج الكتابي الفرنسية</span>
+                        </label>
+                        <input type="number" name="q_prod_fr" [(ngModel)]="formData.q_prod_fr" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Note en anglais</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العدد في مادة الإنجليزية</span>
+                        </label>
+                        <input type="number" name="q_anglais" [(ngModel)]="formData.q_anglais" min="0" max="20"
+                            step="0.5" class="form-control premium-input">
+                    </div>
+                </div>
+
+                <div class="question-group mt-3">
+                    <label class="question-label">
+                        <span [class.hidden]="currentLang !== 'fr'">Observations des enseignants sur les notes</span>
+                        <span [class.hidden]="currentLang !== 'ar'">ملاحظات المعلمين على النتائج</span>
+                    </label>
+                    <div class="radio-group-modern mt-2">
+                        <label class="radio-option-card" [class.selected]="formData.q_obs === 'Très bien'">
+                            <input type="radio" name="q_obs" value="Très bien" [(ngModel)]="formData.q_obs">
+                            <span class="dot"></span>
+                            <span [class.hidden]="currentLang !== 'fr'">Très bien</span>
+                            <span [class.hidden]="currentLang !== 'ar'">جيد جداً</span>
+                        </label>
+                        <label class="radio-option-card" [class.selected]="formData.q_obs === 'Bien'">
+                            <input type="radio" name="q_obs" value="Bien" [(ngModel)]="formData.q_obs">
+                            <span class="dot"></span>
+                            <span [class.hidden]="currentLang !== 'fr'">Bien</span>
+                            <span [class.hidden]="currentLang !== 'ar'">جيد</span>
+                        </label>
+                        <label class="radio-option-card" [class.selected]="formData.q_obs === 'Passable'">
+                            <input type="radio" name="q_obs" value="Passable" [(ngModel)]="formData.q_obs">
+                            <span class="dot"></span>
+                            <span [class.hidden]="currentLang !== 'fr'">Passable</span>
+                            <span [class.hidden]="currentLang !== 'ar'">مقبول</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 3: Section 2 – Comportement -->
+        <div class="step-content" *ngIf="currentStep === 3">
+            <div class="card section shadow-sm border-0 mb-4">
+                <div class="section-header">
+                    <div class="section-number">3</div>
+                    <h2 class="section-title">
+                        <span [class.hidden]="currentLang !== 'fr'">Comportement</span>
+                        <span [class.hidden]="currentLang !== 'ar'">السلوك</span>
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Fréquence des punitions (0–5)</span>
+                            <span [class.hidden]="currentLang !== 'ar'">تكرار العقوبات (0–5)</span>
+                        </label>
+                        <input type="number" name="q_punitions" [(ngModel)]="formData.q_punitions" min="0" max="5"
+                            class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Relations avec l'enseignant (0–5)</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العلاقات مع المعلم (0–5)</span>
+                        </label>
+                        <input type="number" name="q_rel_enseignant" [(ngModel)]="formData.q_rel_enseignant" min="0"
+                            max="5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Relations avec les camarades (0–5)</span>
+                            <span [class.hidden]="currentLang !== 'ar'">العلاقات مع الزملاء (0–5)</span>
+                        </label>
+                        <input type="number" name="q_rel_camarades" [(ngModel)]="formData.q_rel_camarades" min="0"
+                            max="5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Comportement général (0–5)</span>
+                            <span [class.hidden]="currentLang !== 'ar'">السلوك العام (0–5)</span>
+                        </label>
+                        <input type="number" name="q_comportement_gen" [(ngModel)]="formData.q_comportement_gen" min="0"
+                            max="5" class="form-control premium-input">
+                    </div>
+                </div>
+
+                <div class="row mt-3">
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Responsable de ses objets personnels ?</span>
+                            <span [class.hidden]="currentLang !== 'ar'">هل هو مسؤول عن أغراضه الشخصية؟</span>
+                        </label>
+                        <select name="q_responsable_objets" [(ngModel)]="formData.q_responsable_objets"
+                            class="form-select premium-input">
+                            <option value="">--</option>
+                            <option value="Oui">Oui / نعم</option>
+                            <option value="Non">Non / لا</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Suivi avec un pédopsychiatre</span>
+                            <span [class.hidden]="currentLang !== 'ar'">متابعة مع طبيب نفسي للأطفال</span>
+                        </label>
+                        <select name="q_pedopsychiatre" [(ngModel)]="formData.q_pedopsychiatre"
+                            class="form-select premium-input">
+                            <option value="">--</option>
+                            <option value="Oui">Oui / نعم</option>
+                            <option value="Non">Non / لا</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group mt-3">
+                    <label class="question-label">
+                        <span [class.hidden]="currentLang !== 'fr'">Centres d’intérêt / Activités qui l’attirent</span>
+                        <span [class.hidden]="currentLang !== 'ar'">مراكز الاهتمام / الأنشطة التي تجذبه</span>
+                    </label>
+                    <textarea name="q_interets" [(ngModel)]="formData.q_interets" class="form-control premium-input"
+                        rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step 4: Section 3 – Biographie et Contexte familial -->
+        <div class="step-content" *ngIf="currentStep === 4">
+            <div class="card section shadow-sm border-0 mb-4">
+                <div class="section-header">
+                    <div class="section-number">4</div>
+                    <h2 class="section-title">
+                        <span [class.hidden]="currentLang !== 'fr'">Biographie & Contexte familial</span>
+                        <span [class.hidden]="currentLang !== 'ar'">السيرة الذاتية والسياق العائلي</span>
+                    </h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Rang dans la famille</span>
+                            <span [class.hidden]="currentLang !== 'ar'">الترتيب في العائلة</span>
+                        </label>
+                        <input type="number" name="q_rang_famille" [(ngModel)]="formData.q_rang_famille"
+                            class="form-control premium-input">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Qualité relationnelle (0–5)</span>
+                            <span [class.hidden]="currentLang !== 'ar'">جودة العلاقات العائلية (0–5)</span>
+                        </label>
+                        <input type="number" name="q_qualite_rel_famille" [(ngModel)]="formData.q_qualite_rel_famille"
+                            min="0" max="5" class="form-control premium-input">
+                    </div>
+                    <div class="col-md-4 mb-4">
+                        <label class="question-label">
+                            <span [class.hidden]="currentLang !== 'fr'">Situation familiale</span>
+                            <span [class.hidden]="currentLang !== 'ar'">الوضع العائلي</span>
+                        </label>
+                        <select name="q_situation_familiale" [(ngModel)]="formData.q_situation_familiale"
+                            class="form-select premium-input">
+                            <option value="">--</option>
+                            <option value="Stable">Stable / مستقر</option>
+                            <option value="Divorcés">Divorcés / مطلقان</option>
+                            <option value="Séparés">Séparés / منفصلان</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="question-group mt-3">
+                    <label class="question-label">
+                        <span [class.hidden]="currentLang !== 'fr'">Notes additionnelles</span>
+                        <span [class.hidden]="currentLang !== 'ar'">ملاحظات إضافية</span>
+                    </label>
+                    <textarea name="q_comportement" [(ngModel)]="formData.q_comportement"
+                        class="form-control premium-input" rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navigation Footer -->
+        <div class="navigation-footer d-flex justify-content-between align-items-center mt-5">
+            <button type="button" class="btn btn-outline-primary pill-btn px-4 py-2" (click)="prevStep()"
+                [disabled]="currentStep === 1">
+                <i class="fa fa-arrow-left me-2"></i>
+                <span [class.hidden]="currentLang !== 'fr'">Précédent</span>
+                <span [class.hidden]="currentLang !== 'ar'">السابق</span>
+            </button>
+
+            <button type="submit" class="btn btn-success pill-btn px-5 py-2">
+                <span [class.hidden]="currentLang !== 'fr'">Enregistrer</span>
+                <span [class.hidden]="currentLang !== 'ar'">حفظ</span>
+                <i class="fa fa-check ms-2"></i>
+            </button>
+
+            <button type="button" class="btn btn-primary pill-btn px-4 py-2" (click)="nextStep()"
+                [disabled]="currentStep === totalSteps">
+                <span [class.hidden]="currentLang !== 'fr'">Suivant</span>
+                <span [class.hidden]="currentLang !== 'ar'">التالي</span>
+                <i class="fa fa-arrow-right ms-2"></i>
+            </button>
+        </div>
+    </form>
+</div>

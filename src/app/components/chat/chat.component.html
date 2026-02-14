@@ -1,0 +1,65 @@
+<div class="chat-layout" [class.sidebar-hidden]="!isSidebarOpen">
+    <!-- Conversation History Sidebar -->
+    <aside class="history-sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn" (click)="startNewChat()">
+                <i class="fa fa-plus"></i> Nouvelle discussion
+            </button>
+        </div>
+        <div class="conversations-list">
+            <div *ngFor="let conv of conversations" class="conversation-item"
+                [class.active]="conv.id === currentConversationId" (click)="selectConversation(conv.id)">
+                <i class="fa fa-comments"></i>
+                <div class="conv-info">
+                    <span class="conv-title">{{ conv.title }}</span>
+                    <span class="conv-date">{{ conv.updated_at | date:'shortDate' }}</span>
+                </div>
+                <button class="delete-conv-btn" (click)="deleteConversation($event, conv.id)">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <div class="chat-main">
+        <div class="chat-header">
+            <div class="header-left">
+                <button class="sidebar-toggle" (click)="toggleSidebar()">
+                    <i class="fa" [ngClass]="isSidebarOpen ? 'fa-indent' : 'fa-outdent'"></i>
+                </button>
+                <div>
+                    <h2><i class="fa fa-robot"></i> Assistant Éducation & Nutrition</h2>
+                    <p>Posez vos questions sur l'éducation et la nutrition des enfants</p>
+                </div>
+            </div>
+            <button class="clear-btn" (click)="clearChat()" title="Réinitialiser l'affichage">
+                <i class="fa fa-refresh"></i>
+            </button>
+        </div>
+
+        <div class="chat-history" #chatHistory>
+            <div class="message-bubble" *ngFor="let msg of messages"
+                [ngClass]="{'message-user': msg.sender === 'user', 'message-ai': msg.sender === 'ai'}">
+                <div class="message-content" [innerHTML]="renderMessage(msg.text)">
+                </div>
+                <div class="message-time">
+                    {{ msg.timestamp | date:'HH:mm' }}
+                </div>
+            </div>
+
+            <div class="typing-indicator" *ngIf="isTyping">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+
+        <div class="chat-input-area">
+            <form (ngSubmit)="sendMessage()">
+                <input type="text" [(ngModel)]="userMessage" name="userMessage" placeholder="Écrivez votre message...">
+                <button type="submit" [disabled]="!userMessage">
+                    <i class="fa fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

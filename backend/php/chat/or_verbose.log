@@ -1,0 +1,218 @@
+Model: google/gemini-2.0-flash-exp:free
+* Host openrouter.ai:443 was resolved.
+* IPv6: 2606:4700::6812:273, 2606:4700::6812:373
+* IPv4: 104.18.3.115, 104.18.2.115
+*   Trying 104.18.3.115:443...
+* Connected to openrouter.ai (104.18.3.115) port 443
+* ALPN: curl offers h2,http/1.1
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / id-ecPublicKey
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=openrouter.ai
+*  start date: Dec 27 18:14:28 2025 GMT
+*  expire date: Mar 27 19:14:15 2026 GMT
+*  subjectAltName: host "openrouter.ai" matched cert's "openrouter.ai"
+*  issuer: C=US; O=Google Trust Services; CN=WE1
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+*   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+*   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using sha256WithRSAEncryption
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://openrouter.ai/api/v1/chat/completions
+* [HTTP/2] [1] [:method: POST]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: openrouter.ai]
+* [HTTP/2] [1] [:path: /api/v1/chat/completions]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [authorization: Bearer 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]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [http-referer: http://localhost:4200]
+* [HTTP/2] [1] [content-length: 92]
+> POST /api/v1/chat/completions HTTP/2
+Host: openrouter.ai
+Accept: */*
+Authorization: Bearer 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
+Content-Type: application/json
+HTTP-Referer: http://localhost:4200
+Content-Length: 92
+
+* upload completely sent off: 92 bytes
+* old SSL session ID is stale, removing
+< HTTP/2 404 
+< date: Sat, 14 Feb 2026 14:36:57 GMT
+< content-type: application/json
+< access-control-allow-origin: *
+< permissions-policy: payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+< referrer-policy: no-referrer, strict-origin-when-cross-origin
+< x-content-type-options: nosniff
+< server: cloudflare
+< cf-ray: 9cdd4cfa9a6860d4-MRS
+< 
+* Connection #0 to host openrouter.ai left intact
+
+Response: {"error":{"message":"No endpoints found for google/gemini-2.0-flash-exp:free.","code":404},"user_id":"user_389S2Zs41VPHapDNJBRWlsYsien"}
+
+Model: google/gemini-flash-1.5-8b:free
+* Host openrouter.ai:443 was resolved.
+* IPv6: 2606:4700::6812:273, 2606:4700::6812:373
+* IPv4: 104.18.3.115, 104.18.2.115
+*   Trying 104.18.3.115:443...
+* Connected to openrouter.ai (104.18.3.115) port 443
+* ALPN: curl offers h2,http/1.1
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / id-ecPublicKey
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=openrouter.ai
+*  start date: Dec 27 18:14:28 2025 GMT
+*  expire date: Mar 27 19:14:15 2026 GMT
+*  subjectAltName: host "openrouter.ai" matched cert's "openrouter.ai"
+*  issuer: C=US; O=Google Trust Services; CN=WE1
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+*   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+*   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using sha256WithRSAEncryption
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://openrouter.ai/api/v1/chat/completions
+* [HTTP/2] [1] [:method: POST]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: openrouter.ai]
+* [HTTP/2] [1] [:path: /api/v1/chat/completions]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [authorization: Bearer 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]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [http-referer: http://localhost:4200]
+* [HTTP/2] [1] [content-length: 91]
+> POST /api/v1/chat/completions HTTP/2
+Host: openrouter.ai
+Accept: */*
+Authorization: Bearer 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
+Content-Type: application/json
+HTTP-Referer: http://localhost:4200
+Content-Length: 91
+
+* upload completely sent off: 91 bytes
+* old SSL session ID is stale, removing
+< HTTP/2 404 
+< date: Sat, 14 Feb 2026 14:36:57 GMT
+< content-type: application/json
+< access-control-allow-origin: *
+< permissions-policy: payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+< referrer-policy: no-referrer, strict-origin-when-cross-origin
+< x-content-type-options: nosniff
+< server: cloudflare
+< cf-ray: 9cdd4cfcfc831a5e-MRS
+< 
+* Connection #0 to host openrouter.ai left intact
+
+Response: {"error":{"message":"No endpoints found for google/gemini-flash-1.5-8b:free.","code":404},"user_id":"user_389S2Zs41VPHapDNJBRWlsYsien"}
+
+Model: mistralai/mistral-7b-instruct:free
+* Host openrouter.ai:443 was resolved.
+* IPv6: 2606:4700::6812:273, 2606:4700::6812:373
+* IPv4: 104.18.3.115, 104.18.2.115
+*   Trying 104.18.3.115:443...
+* Connected to openrouter.ai (104.18.3.115) port 443
+* ALPN: curl offers h2,http/1.1
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / id-ecPublicKey
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=openrouter.ai
+*  start date: Dec 27 18:14:28 2025 GMT
+*  expire date: Mar 27 19:14:15 2026 GMT
+*  subjectAltName: host "openrouter.ai" matched cert's "openrouter.ai"
+*  issuer: C=US; O=Google Trust Services; CN=WE1
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+*   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+*   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using sha256WithRSAEncryption
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://openrouter.ai/api/v1/chat/completions
+* [HTTP/2] [1] [:method: POST]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: openrouter.ai]
+* [HTTP/2] [1] [:path: /api/v1/chat/completions]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [authorization: Bearer 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]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [http-referer: http://localhost:4200]
+* [HTTP/2] [1] [content-length: 94]
+> POST /api/v1/chat/completions HTTP/2
+Host: openrouter.ai
+Accept: */*
+Authorization: Bearer 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
+Content-Type: application/json
+HTTP-Referer: http://localhost:4200
+Content-Length: 94
+
+* upload completely sent off: 94 bytes
+* old SSL session ID is stale, removing
+< HTTP/2 404 
+< date: Sat, 14 Feb 2026 14:36:58 GMT
+< content-type: application/json
+< cf-ray: 9cdd4cff7d44e231-MRS
+< access-control-allow-origin: *
+< permissions-policy: payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+< referrer-policy: no-referrer, strict-origin-when-cross-origin
+< x-content-type-options: nosniff
+< server: cloudflare
+< 
+* Connection #0 to host openrouter.ai left intact
+
+Response: {"error":{"message":"No endpoints found for mistralai/mistral-7b-instruct:free.","code":404},"user_id":"user_389S2Zs41VPHapDNJBRWlsYsien"}
+
+Model: openai/gpt-4o-mini
+* Host openrouter.ai:443 was resolved.
+* IPv6: 2606:4700::6812:273, 2606:4700::6812:373
+* IPv4: 104.18.3.115, 104.18.2.115
+*   Trying 104.18.3.115:443...
+* Connected to openrouter.ai (104.18.3.115) port 443
+* ALPN: curl offers h2,http/1.1
+* SSL connection using TLSv1.3 / TLS_AES_256_GCM_SHA384 / X25519 / id-ecPublicKey
+* ALPN: server accepted h2
+* Server certificate:
+*  subject: CN=openrouter.ai
+*  start date: Dec 27 18:14:28 2025 GMT
+*  expire date: Mar 27 19:14:15 2026 GMT
+*  subjectAltName: host "openrouter.ai" matched cert's "openrouter.ai"
+*  issuer: C=US; O=Google Trust Services; CN=WE1
+*  SSL certificate verify result: unable to get local issuer certificate (20), continuing anyway.
+*   Certificate level 0: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA256
+*   Certificate level 1: Public key type EC/prime256v1 (256/128 Bits/secBits), signed using ecdsa-with-SHA384
+*   Certificate level 2: Public key type EC/secp384r1 (384/192 Bits/secBits), signed using sha256WithRSAEncryption
+* using HTTP/2
+* [HTTP/2] [1] OPENED stream for https://openrouter.ai/api/v1/chat/completions
+* [HTTP/2] [1] [:method: POST]
+* [HTTP/2] [1] [:scheme: https]
+* [HTTP/2] [1] [:authority: openrouter.ai]
+* [HTTP/2] [1] [:path: /api/v1/chat/completions]
+* [HTTP/2] [1] [accept: */*]
+* [HTTP/2] [1] [authorization: Bearer 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]
+* [HTTP/2] [1] [content-type: application/json]
+* [HTTP/2] [1] [http-referer: http://localhost:4200]
+* [HTTP/2] [1] [content-length: 78]
+> POST /api/v1/chat/completions HTTP/2
+Host: openrouter.ai
+Accept: */*
+Authorization: Bearer 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
+Content-Type: application/json
+HTTP-Referer: http://localhost:4200
+Content-Length: 78
+
+* upload completely sent off: 78 bytes
+* old SSL session ID is stale, removing
+< HTTP/2 200 
+< date: Sat, 14 Feb 2026 14:36:59 GMT
+< content-type: application/json
+< access-control-allow-origin: *
+< permissions-policy: payment=(self "https://checkout.stripe.com" "https://connect-js.stripe.com" "https://js.stripe.com" "https://*.js.stripe.com" "https://hooks.stripe.com")
+< referrer-policy: no-referrer, strict-origin-when-cross-origin
+< x-content-type-options: nosniff
+< server: cloudflare
+< cf-ray: 9cdd4d01da04e1e4-MRS
+< 
+* Connection #0 to host openrouter.ai left intact
+
+Response: 
+         
+{"id":"gen-1771079818-ugLvbYQ0btHXW3Cn1MPO","provider":"OpenAI","model":"openai/gpt-4o-mini","object":"chat.completion","created":1771079818,"choices":[{"logprobs":null,"finish_reason":"stop","native_finish_reason":"stop","index":0,"message":{"role":"assistant","content":"Hello! How can I assist you today?","refusal":null,"reasoning":null}}],"system_fingerprint":"fp_373a14eb6f","usage":{"prompt_tokens":8,"completion_tokens":9,"total_tokens":17,"cost":0.0000066,"is_byok":false,"prompt_tokens_details":{"cached_tokens":0,"audio_tokens":0},"cost_details":{"upstream_inference_cost":0.0000066,"upstream_inference_prompt_cost":0.0000012,"upstream_inference_completions_cost":0.0000054},"completion_tokens_details":{"reasoning_tokens":0,"audio_tokens":0}}}
+

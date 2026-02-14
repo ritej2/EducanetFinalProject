@@ -1,0 +1,80 @@
+<div class="page-header">
+    <h1 class="page-title">Gérer mon compte</h1>
+</div>
+
+<div class="card" style="max-width: 700px; cursor: default;">
+    <div *ngIf="loading" class="loading-spinner">Chargement...</div>
+
+    <form #accountForm="ngForm" (ngSubmit)="updateAccount(accountForm)" *ngIf="!loading" novalidate>
+
+        <!-- Nom Complet -->
+        <div class="form-group">
+            <label for="name">Nom complet</label>
+            <input type="text" id="name" name="name" class="form-control" [(ngModel)]="user.name" required>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" class="form-control" [(ngModel)]="user.email"
+                pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$" required #email="ngModel">
+            <div class="error-msg" *ngIf="email.invalid && email.touched">
+                Email invalide.
+            </div>
+        </div>
+
+        <!-- Téléphone -->
+        <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input type="text" id="phone" name="phone" class="form-control" [(ngModel)]="user.phone"
+                placeholder="0XXXXXXXXX" #phone="ngModel">
+        </div>
+
+        <!-- Date d'inscription (Read-only) -->
+        <div class="form-group">
+            <label>Date d'inscription</label>
+            <div class="form-control-static" style="padding: 0.8rem 0; color: #666;">
+                {{ user.created_at | date:'dd MMMM yyyy' }}
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0; opacity: 0.1;">
+
+        <h3 style="margin-bottom: 1.5rem; font-size: 1.2rem; color: var(--purple-primary);">Changer le mot de passe</h3>
+
+        <!-- Nouveau Mot de Passe -->
+        <div class="form-group">
+            <label for="newPassword">Nouveau mot de passe</label>
+            <input type="password" id="newPassword" name="newPassword" class="form-control"
+                [(ngModel)]="user.newPassword" placeholder="••••••••">
+        </div>
+
+        <!-- Confirmation -->
+        <div class="form-group">
+            <label for="confirmPassword">Confirmer le mot de passe</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" class="form-control"
+                [(ngModel)]="user.confirmPassword" placeholder="••••••••">
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+            <!-- Submit -->
+            <button type="submit" class="btn btn-primary" [disabled]="accountForm.invalid || saving">
+                <span *ngIf="!saving">Enregistrer</span>
+                <span *ngIf="saving"><i class="fa fa-spinner fa-spin"></i> Enregistrement...</span>
+            </button>
+
+            <!-- Delete Button (Disabled as per user request) -->
+            <button type="button" class="btn" style="background: #f5f5f5; color: #999; cursor: not-allowed;" disabled
+                title="La suppression de compte est temporairement désactivée">
+                <i class="fa fa-trash"></i> Supprimer le compte
+            </button>
+        </div>
+
+        <!-- Messages -->
+        <div *ngIf="message.text"
+            [ngClass]="{'success-msg': message.type === 'success', 'error-msg': message.type === 'error'}"
+            style="margin-top: 15px; font-weight: bold;">
+            {{ message.text }}
+        </div>
+    </form>
+</div>

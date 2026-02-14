@@ -1,0 +1,49 @@
+{
+    "/api/chat": {
+        "target": "http://localhost:11434",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/chat": "/api/chat"
+        },
+        "logLevel": "debug",
+        "proxyTimeout": 600000,
+        "timeout": 600000
+    },
+    "/api/rag": {
+        "target": "http://127.0.0.1",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/rag": "/backend/rag"
+        },
+        "logLevel": "debug"
+    },
+    "/api/php": {
+        "target": "http://127.0.0.1",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/php": "/backend/php"
+        },
+        "logLevel": "debug"
+    },
+    "/api/external": {
+        "target": "https://mon-compte.rafi9ni.pro",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/external": ""
+        },
+        "logLevel": "debug"
+    },
+    "/api/direct": {
+        "target": "https://mon-compte.rafi9ni.pro",
+        "secure": false,
+        "changeOrigin": true,
+        "pathRewrite": {
+            "^/api/direct": ""
+        },
+        "logLevel": "debug"
+    }
+}

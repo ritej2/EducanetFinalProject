@@ -1,0 +1,107 @@
+<div class="container-fluid">
+    <!-- Header -->
+    <div class="conseils-header fade-in">
+        <div class="header-text">
+            <h1>Conseils & Astuces</h1>
+            <p class="text-purple-600 opacity-70">Découvrez nos recommandations pour vous faciliter la vie</p>
+        </div>
+
+        <!-- Add Tip Button for Admins -->
+        <button *ngIf="isAdmin" (click)="openAddModal()" class="btn-add-tip">
+            <i class="fa fa-plus-circle"></i> Ajouter une astuce
+        </button>
+    </div>
+
+    <!-- Category Filters -->
+    <div class="tips-filter-container fade-in-up">
+        <button *ngFor="let cat of categories" class="filter-btn" [ngClass]="{'active': selectedCategory === cat.id}"
+            (click)="filterByCategory(cat.id)">
+            <span class="mr-2">{{cat.icon}}</span> {{cat.name}}
+        </button>
+    </div>
+
+    <!-- Loading Spinner -->
+    <div *ngIf="loading" class="text-center py-5">
+        <div class="loading-spinner"></div>
+        <p>Chargement des conseils...</p>
+    </div>
+
+    <!-- Tips Grid -->
+    <div *ngIf="!loading" class="grid-2x2">
+        <div *ngFor="let tip of filteredTips; let i = index" [style.animation-delay]="(i * 0.1) + 's'"
+            class="fade-in-up">
+            <div class="tip-card-container">
+                <!-- Admin Actions on Card -->
+                <div *ngIf="isAdmin" class="tip-admin-actions">
+                    <button class="action-btn edit" (click)="openEditModal(tip)"><i class="fa fa-edit"></i></button>
+                    <button class="action-btn delete" (click)="deleteTip(tip.id)"><i class="fa fa-trash"></i></button>
+                </div>
+
+                <div class="tip-icon-container" [ngClass]="getGradientClass(tip.color)">
+                    <i class="fa-solid fa-{{tip.icon || 'lightbulb'}}"></i>
+                </div>
+                <h3 class="h5 font-weight-bold text-purple-900 mb-2">{{tip.title}}</h3>
+                <p class="text-purple-600 opacity-70 mb-0" style="line-height: 1.6;">
+                    {{tip.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="text-center py-5" *ngIf="!loading && filteredTips.length === 0">
+        <p class="text-muted">Aucun conseil disponible dans cette catégorie</p>
+    </div>
+
+    <!-- Admin Modal -->
+    <div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+        <div class="admin-modal" (click)="$event.stopPropagation()">
+            <div class="modal-header">
+                <h2>{{ isEditing ? 'Modifier l\'astuce' : 'Ajouter une astuce' }}</h2>
+                <button (click)="closeModal()" class="close-btn">&times;</button>
+            </div>
+            <form (ngSubmit)="saveTip()" #tipForm="ngForm">
+                <div class="form-group">
+                    <label>Titre</label>
+                    <input type="text" [(ngModel)]="currentTip.title" name="title" required class="form-control">
+                </div>
+                <div class="form-group">
+                    <label>Description</label>
+                    <textarea [(ngModel)]="currentTip.description" name="description" required class="form-control"
+                        rows="3"></textarea>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <label>Catégorie</label>
+                        <select [(ngModel)]="currentTip.category" name="category" class="form-control">
+                            <option *ngFor="let cat of categories.slice(1)" [value]="cat.id">{{cat.name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Icône (FontAwesome)</label>
+                        <input type="text" [(ngModel)]="currentTip.icon" name="icon" class="form-control"
+                            placeholder="Ex: lightbulb">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Gradient/Couleur</label>
+                    <select [(ngModel)]="currentTip.color" name="color" class="form-control">
+                        <option value="gradient-sante-1">Santé 1</option>
+                        <option value="gradient-sante-2">Santé 2</option>
+                        <option value="gradient-alim-1">Alimentation 1</option>
+                        <option value="gradient-alim-2">Alimentation 2</option>
+                        <option value="gradient-sommeil">Sommeil</option>
+                        <option value="gradient-educ-1">Éducation 1</option>
+                        <option value="gradient-educ-2">Éducation 2</option>
+                        <option value="gradient-dev">Développement</option>
+                        <option value="gradient-secu">Sécurité</option>
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" (click)="closeModal()" class="btn btn-secondary">Annuler</button>
+                    <button type="submit" class="btn btn-primary" [disabled]="!tipForm.valid">Enregistrer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

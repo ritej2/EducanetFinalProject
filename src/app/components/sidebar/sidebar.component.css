@@ -1,0 +1,92 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+/* Sidebar Sidebar Profile and Logout Styles */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 1rem;
+    background: rgba(91, 58, 140, 0.03);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary-purple), var(--accent-pink));
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.2rem;
+}
+
+.user-info {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.user-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.user-email {
+    font-size: 0.8rem;
+    color: #94a3b8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Updated Logout Section */
+.logout-section {
+    /* margin-top managed by nav-links flex-grow */
+    padding-top: 1rem;
+    border-top: 1px solid #f1f5f9;
+    margin-bottom: 0.5rem;
+}
+
+.logout-section a {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 0.8rem 1.5rem;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, #f87171, #ef4444);
+    border-radius: var(--radius-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 600;
+    margin: 0.5rem;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+.logout-section a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(239, 68, 68, 0.3);
+    opacity: 0.9;
+}
+
+.logout-section a i {
+    font-size: 1.1rem;
+}
+
+/* Override footer margin since logout-section now handles the spacing */
+.sidebar-footer {
+    margin-top: 0 !important;
+    padding-top: 0.5rem;
+}

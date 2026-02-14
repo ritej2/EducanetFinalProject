@@ -1,0 +1,165 @@
+.admin-dashboard {
+    padding: 1rem;
+}
+
+.dashboard-header {
+    margin-bottom: 2.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 2rem;
+}
+
+.search-box {
+    position: relative;
+    width: 300px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--admin-purple-400);
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 2.5rem;
+    border-radius: 50px;
+    border: 1px solid var(--card-border);
+    background: var(--card-bg);
+    backdrop-filter: blur(5px);
+    color: var(--admin-purple-900);
+    transition: all 0.3s ease;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--admin-purple-400);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+}
+
+@media (max-width: 768px) {
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}
+
+.text-admin-title {
+    color: var(--admin-purple-900);
+    font-size: 2.2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.text-admin-subtitle {
+    color: var(--admin-purple-600);
+    font-size: 1.1rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stats-card {
+    position: relative;
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    overflow: hidden;
+    border: 1px solid var(--card-border);
+    transition: all 0.3s ease;
+    cursor: default;
+    box-shadow: var(--shadow-sm);
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+}
+
+.card-glass {
+    position: absolute;
+    inset: 0;
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    z-index: 1;
+}
+
+.card-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.card-users {
+    background: var(--grad-users);
+}
+
+.card-children {
+    background: var(--grad-children);
+}
+
+.card-convs {
+    background: var(--grad-convs);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.card-users .stat-icon {
+    color: #9333ea;
+}
+
+.card-children .stat-icon {
+    color: #2563eb;
+}
+
+.card-convs .stat-icon {
+    color: #059669;
+}
+
+.stat-info h3 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--admin-purple-600);
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--admin-purple-900);
+}
+
+.admin-view-content {
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border-radius: var(--radius-lg);
+    padding: 1.5rem;
+    border: 1px solid var(--card-border);
+    box-shadow: var(--shadow-sm);
+    width: 100%;
+}

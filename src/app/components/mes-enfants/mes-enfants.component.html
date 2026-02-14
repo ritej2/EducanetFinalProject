@@ -1,0 +1,59 @@
+<div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 class="page-title">Mes Enfants</h1>
+    <a routerLink="/ajouter-enfant" class="btn btn-primary" *ngIf="!loading && children.length > 0">
+        <i class="fa fa-plus"></i> Ajouter
+    </a>
+</div>
+
+<div *ngIf="loading" class="loading-spinner">
+    Chargement...
+</div>
+
+<!-- Empty State -->
+<div class="empty-state" *ngIf="!loading && children.length === 0" style="text-align: center; padding: 4rem;">
+    <div style="font-size: 4rem; color: #cbd5e0; margin-bottom: 1.5rem;">
+        <i class="fa fa-child"></i>
+    </div>
+    <h3 style="color: var(--text-dark); margin-bottom: 1rem;">Aucun enfant enregistré</h3>
+    <p style="color: #7f8c8d; margin-bottom: 2rem;">Ajoutez vos enfants pour commencer à gérer leur agenda.</p>
+    <a routerLink="/ajouter-enfant" class="btn btn-primary">
+        Ajouter un enfant
+    </a>
+</div>
+
+<!-- Children Grid -->
+<div class="grid-2x2" *ngIf="!loading && children.length > 0">
+    <div class="card child-card" *ngFor="let child of children">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+            <div class="child-info" style="display: flex; gap: 1rem;">
+                <div class="avatar"
+                    style="width: 60px; height: 60px; background: #e3eeff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                    <span *ngIf="child.gender === 'garçon'">👦</span>
+                    <span *ngIf="child.gender === 'fille'">👧</span>
+
+                </div>
+                <div>
+                    <h3 style="margin-bottom: 0.2rem;">{{ child.firstName }}</h3>
+                    <p style="font-size: 0.9rem;">{{ getAge(child.birthDate) }} ans</p>
+                    <p style="font-size: 0.8rem; opacity: 0.7;">Né(e) le {{ child.birthDate | date:'dd/MM/yyyy' }}</p>
+                </div>
+            </div>
+
+            <div class="actions" style="display: flex; gap: 0.5rem;">
+                <a [routerLink]="['/modifier-enfant', child.id]" class="btn-icon"
+                    style="color: var(--secondary-blue); cursor: pointer;" title="Modifier">
+                    <i class="fa fa-edit"></i>
+                </a>
+                <a (click)="deleteChild(child.id)" class="btn-icon" style="color: #e74c3c; cursor: pointer;"
+                    title="Supprimer">
+                    <i class="fa fa-trash"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Chatbot FAB -->
+<a routerLink="/chat" class="fab-chat" title="Discuter avec l'IA">
+    <i class="fa fa-robot"></i>
+</a>

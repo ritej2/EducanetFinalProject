@@ -1,0 +1,68 @@
+<div class="page-header">
+    <h1 class="page-title">Bienvenue sur votre Espace Parent</h1>
+    <p class="text-title">Gérez facilement les informations de votre famille</p> <br><br>
+</div>
+
+<div class="grid-2x2" *ngIf="!loading">
+    <!-- Card 1: Vos Enfants -->
+    <div class="card" routerLink="/mes-enfants">
+        <div class="card-icon" style="background: rgba(233, 75, 138, 0.1); color: var(--accent-pink);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-baby w-6 h-6 text-rose-600">
+                <path d="M9 12h.01"></path>
+                <path d="M15 12h.01"></path>
+                <path d="M10 16c.5.3 1.2.5 2 .5s1.5-.2 2-.5"></path>
+                <path
+                    d="M19 6.3a9 9 0 0 1 1.8 3.9 2 2 0 0 1 0 3.6 9 9 0 0 1-17.6 0 2 2 0 0 1 0-3.6A9 9 0 0 1 12 3c2 0 3.5 1.1 3.5 2.5s-.9 2.5-2 2.5c-.8 0-1.5-.4-1.5-1">
+                </path>
+            </svg>
+        </div>
+        <h3>Vos Enfants</h3>
+        <p>Consultez et gérez les profils de vos enfants en un clin d'œil</p><br>
+        <p>{{ childrenCount }} enfant(s) enregistré(s)</p>
+    </div>
+
+    <!-- Card 2: Bibliothèque -->
+    <div class="card" routerLink="/bibliotheque">
+        <div class="card-icon" style="background: rgba(160, 82, 45, 0.1); color: var(--accent-chestnut);">
+            <i class="fa fa-book"></i>
+        </div>
+        <h3>Bibliothèque</h3>
+        <p>Accédez à vos documents et ressources éducatives</p><br>
+        <p>Consulter la bibliothèque</p>
+    </div>
+
+
+
+    <!-- Card 4: Conseils -->
+    <div class="card" routerLink="/conseils">
+        <div class="card-icon" style="background: rgba(91, 58, 140, 0.1); color: var(--primary-purple);">
+            <i class="fa fa-lightbulb"></i>
+        </div>
+        <h3>Conseils & Astuces</h3>
+        <p>Découvrez nos recommandations pour vous faciliter la vie </p> <br>
+        <p>Voir les conseils</p>
+    </div>
+
+    <!-- Card 5: Paramètres -->
+    <div class="card" routerLink="/gerer-compte">
+        <div class="card-icon" style="background: rgba(102, 217, 165, 0.1); color: var(--success-green);">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                class="lucide lucide-settings w-6 h-6 text-purple-600">
+                <path
+                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z">
+                </path>
+                <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+        </div>
+        <h3>Paramètres</h3>
+        <p>Personnalisez votre espace selon vos préférences </p> <br>
+        <p> Configuration rapide</p>
+    </div>
+</div>
+
+<div *ngIf="loading" class="loading-spinner">
+    Chargement...
+</div>

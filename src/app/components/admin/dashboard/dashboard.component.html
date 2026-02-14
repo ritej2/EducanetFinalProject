@@ -1,0 +1,51 @@
+<div class="admin-dashboard">
+    <header class="dashboard-header">
+        <div class="header-main">
+            <h1 class="text-admin-title">Espace Parent Admin</h1>
+            <p class="text-admin-subtitle">Vue d'ensemble de votre application</p>
+        </div>
+    </header>
+
+    <div class="stats-grid">
+        <!-- Users stats -->
+        <div class="stats-card card-users">
+            <div class="card-glass"></div>
+            <div class="card-content">
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
+                <div class="stat-info">
+                    <h3>Utilisateurs</h3>
+                    <p class="stat-value">{{ stats.users }}</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Children stats -->
+        <div class="stats-card card-children">
+            <div class="card-glass"></div>
+            <div class="card-content">
+                <div class="stat-icon"><i class="fa fa-child"></i></div>
+                <div class="stat-info">
+                    <h3>Enfants</h3>
+                    <p class="stat-value">{{ stats.children }}</p>
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="stats-card card-convs">
+            <div class="card-glass"></div>
+            <div class="card-content">
+                <div class="stat-icon"><i class="fa fa-comments"></i></div>
+                <div class="stat-info">
+                    <h3>Conversations</h3>
+                    <p class="stat-value">{{ stats.conversations }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <div class="admin-view-content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

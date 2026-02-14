@@ -1,0 +1,79 @@
+<div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+    <h1 class="page-title">Calendrier</h1>
+    <button class="btn btn-primary" (click)="openAddModal()">
+        <i class="fa fa-plus"></i> Nouvel événement
+    </button>
+</div>
+
+<div class="calendar-container card" *ngIf="!loading">
+    <!-- Header -->
+    <div class="calendar-header">
+        <button class="nav-btn" (click)="prevMonth()"><i class="fa fa-chevron-left"></i></button>
+        <h2>{{ currentDate | date:'MMMM yyyy' | uppercase }}</h2>
+        <button class="nav-btn" (click)="nextMonth()"><i class="fa fa-chevron-right"></i></button>
+    </div>
+
+    <!-- Week Days -->
+    <div class="calendar-week-days">
+        <div>Lun</div>
+        <div>Mar</div>
+        <div>Mer</div>
+        <div>Jeu</div>
+        <div>Ven</div>
+        <div>Sam</div>
+        <div>Dim</div>
+    </div>
+
+    <!-- Grid -->
+    <div class="calendar-grid">
+        <div class="week-row" *ngFor="let week of calendarWeeks">
+            <div class="day-cell" *ngFor="let day of week"
+                [ngClass]="{ 'other-month': !day.isCurrentMonth, 'today': day.isToday }">
+
+                <span class="day-number">{{ day.dayNum }}</span>
+
+                <!-- Events List for the Day -->
+                <div class="day-events">
+                    <div class="event-dot" *ngFor="let event of day.events" [title]="event.title"
+                        (click)="deleteEvent(event.id); $event.stopPropagation();">
+                        {{ event.title }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Add Event Modal -->
+<div class="modal-overlay" *ngIf="showModal" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <div class="modal-header">
+            <h3>Ajouter un événement</h3>
+            <button class="close-btn" (click)="closeModal()">&times;</button>
+        </div>
+        <form #eventForm="ngForm" (ngSubmit)="saveEvent()" novalidate>
+            <div class="form-group">
+                <label>Titre *</label>
+                <input type="text" name="title" [(ngModel)]="newEvent.title" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Date *</label>
+                <input type="date" name="date" [(ngModel)]="newEvent.date" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label>Description</label>
+                <textarea name="description" [(ngModel)]="newEvent.description" class="form-control"
+                    rows="3"></textarea>
+            </div>
+
+            <div class="modal-actions">
+                <button type="button" class="btn" style="background: #e0e0e0;" (click)="closeModal()">Annuler</button>
+                <button type="submit" class="btn btn-primary" [disabled]="eventForm.invalid || isSaving">
+                    {{ isSaving ? 'Enregistrement...' : 'Enregistrer' }}
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

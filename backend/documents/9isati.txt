@@ -1,0 +1,65 @@
+issati — Bibliothèque numérique éducative
+1. Présentation générale
+
+9issati est une plateforme éducative numérique dédiée à la lecture interactive pour enfants et adolescents, spécialement conçue pour aider les élèves du primaire au secondaire à développer leur goût pour la lecture et leurs compétences linguistiques.
+
+La plateforme est fournie dans le cadre de l’offre éducative d’Educanet Tunisie, qui est un groupe de services éducatifs numériques.
+
+2. Contenu principal
+Bibliothèque numérique
+
+La plateforme propose une bibliothèque numérique riche et variée composée de centaines de titres disponibles en formats :
+
+Histoires et contes (classiques et modernes)
+
+Romans adaptés aux jeunes lecteurs
+
+Contenu multilingue (principalement en arabe, mais aussi disponible parfois en français, selon les titres)
+
+Certains titres sont disponibles sous forme audio et texte pour encourager la lecture interactive.
+
+3. Fonctionnement du service
+
+Le service 9issati by TT peut être accessible via le portail web (https://9issati.tn
+) et/ou via applications associées.
+
+La plateforme est accessible depuis un navigateur ou une application éducative mobile dédiée.
+
+Elle permet aux enfants de parcourir, lire, écouter ou regarder des histoires éducatives adaptées à différents niveaux d’âge.
+
+4. Objectifs pédagogiques
+
+Les objectifs principaux de 9issati sont :
+
+Renforcer les compétences linguistiques des enfants et adolescents.
+
+Encourager la lecture et la compréhension à travers des contenus adaptés.
+
+Offrir une expérience éducative interactive, avec lecture et parfois formats audio multimédias.
+
+5. Public cible
+
+Élèves du primaire (lecture simple, histoires courtes)
+
+Adolescents du secondaire (contenu plus long et narratif)
+
+Parents à la recherche de contenus éducatifs adaptés pour leurs enfants.
+
+6. Accès et abonnement
+
+La plateforme 9issati by TT peut nécessiter une souscription pour l’accès complet au catalogue, avec une période d’essai gratuite (souvent 3 jours pour les nouveaux abonnés TT).
+
+L’accès peut être effectué via un portail web sécurisé par identifiants personnels.
+
+7. Propriétaire et développeur
+
+🔹 Fournisseur éducatif : Educanet Tunisie
+🔹 Service associé : 9issati, sous la marque éducative de la bibliothèque interactive.
+🔹 Adresse de contact de l’opérateur général (Educanet) : Avenue Yasser Arafat, Sousse, Tunisie.
+
+8. Résumé des points clés à utiliser dans ton projet
+
+9issati est une bibliothèque numérique interactive, pas une plateforme multi‑fonction éducative complète.
+ Elle aide principalement les enfants à lire et à aimer la lecture à travers des textes adaptés et des formats audio‑texte.
+ Elle est accessible via web ou applications mobiles développées par Educanet.
+ La plateforme propose un contenu riche en langues, avec des histoires, des romans et des contes.

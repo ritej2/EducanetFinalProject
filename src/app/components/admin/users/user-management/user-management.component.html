@@ -1,0 +1,109 @@
+<div class="user-management-container">
+    <div class="section-header">
+        <div class="header-main">
+            <h2 class="text-admin-title">Gestion des Utilisateurs</h2>
+            <p class="text-admin-subtitle">Consultez et gérez les comptes utilisateurs</p>
+        </div>
+    </div>
+
+    <div *ngIf="loading" class="loading-container">
+        <div class="spinner"></div>
+        <span>Chargement des données...</span>
+    </div>
+
+    <div *ngIf="error" class="error-banner">
+        <i class="fa fa-exclamation-circle"></i>
+        {{ error }}
+    </div>
+
+    <div class="user-management-layout" [class.show-details]="selectedUser || loadingDetails">
+        <div class="table-container" *ngIf="!loading && users.length > 0">
+            <table class="modern-table">
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Email</th>
+                        <th>Rôle</th>
+                        <th>Inscription</th>
+                        <th class="text-center">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let user of filteredUsers" class="table-row"
+                        [class.row-selected]="selectedUser?.user?.id === user.id">
+                        <td>
+                            <div class="user-cell">
+                                <div class="user-avatar-small">{{ user.name.charAt(0).toUpperCase() }}</div>
+                                <span class="font-semibold">{{ user.name }}</span>
+                            </div>
+                        </td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            <span class="badge" [class.badge-user]="user.role === 'user'">
+                                Utilisateur
+                            </span>
+                        </td>
+                        <td>{{ user.created_at | date:'dd/MM/yyyy' }}</td>
+                        <td class="text-center">
+                            <div class="action-buttons">
+                                <button class="btn-action btn-view" (click)="viewDetails(user.id)" title="Détails">
+                                    <i class="fa fa-eye"></i>
+                                </button>
+                                <button class="btn-action btn-delete" (click)="deleteUser(user.id)" title="Supprimer">
+                                    <i class="fa fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Details Panel (Side Drawer) -->
+        <aside class="details-panel" *ngIf="selectedUser || loadingDetails">
+            <div *ngIf="loadingDetails" class="details-loading">
+                <div class="spinner-small"></div>
+            </div>
+
+            <div class="details-content" *ngIf="selectedUser">
+                <button class="btn-close-details" (click)="closeDetails()">&times;</button>
+
+                <div class="details-header">
+                    <div class="user-avatar-large">{{ selectedUser.user.name.charAt(0).toUpperCase() }}</div>
+                    <div class="header-info">
+                        <h3>{{ selectedUser.user.name }}</h3>
+                        <p class="text-email">{{ selectedUser.user.email }}</p>
+                    </div>
+                </div>
+
+                <div class="details-body">
+                    <div class="counts-grid">
+                        <div class="count-card">
+                            <span class="count-value">{{ selectedUser.stats.children_count }}</span>
+                            <span class="count-label">Enfants</span>
+                        </div>
+                        <div class="count-card">
+                            <span class="count-value">{{ selectedUser.stats.conversation_count }}</span>
+                            <span class="count-label">Chats</span>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <h4><i class="fa fa-child"></i> Mes Enfants</h4>
+                        <div class="kids-list">
+                            <div *ngFor="let kid of selectedUser.children" class="kid-pill">
+                                <i class="fa"
+                                    [ngClass]="kid.gender === 'garçon' ? 'fa-mars text-blue' : 'fa-venus text-pink'"></i>
+                                <div class="kid-meta">
+                                    <span class="kid-name">{{ kid.first_name }}</span>
+                                    <span class="kid-age">{{ kid.birth_date | date:'dd/MM/yyyy' }}</span>
+                                </div>
+                            </div>
+                            <p class="empty-msg" *ngIf="selectedUser.children.length === 0">Aucun enfant trouvé.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </aside>
+    </div>
+</div>
