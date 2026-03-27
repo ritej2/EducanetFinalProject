@@ -7,7 +7,7 @@
 require_once __DIR__ . '/../config/database.php';
 
 // OpenRouter API Configuration (Chat)
-define('OPENROUTER_API_KEY', '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');
+define('OPENROUTER_API_KEY', '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');
 define('OPENROUTER_BASE_URL', 'https://openrouter.ai/api/v1');
 // OpenAI GPT-4o-mini (Stable and Cheap)
 define('OPENROUTER_MODEL', 'openai/gpt-4o-mini');
@@ -87,8 +87,9 @@ function callEmbeddingAPI($text)
 
     if (isset($result['error'])) {
         $msg = is_array($result['error']) ? json_encode($result['error']) : $result['error']['message'] ?? $result['error'];
-        file_put_contents(__DIR__ . '/embed_debug.log', "Error: $msg\n", FILE_APPEND);
-        throw new Exception("Embedding Error: $msg");
+        $maskedKey = substr(OPENROUTER_API_KEY, 0, 8) . "..." . substr(OPENROUTER_API_KEY, -4);
+        file_put_contents(__DIR__ . '/embed_debug.log', "Error: $msg | Key Used: $maskedKey\n", FILE_APPEND);
+        throw new Exception("Embedding Error: $msg | Masked Key: $maskedKey");
     }
 
     if (isset($result['data'][0]['embedding'])) {

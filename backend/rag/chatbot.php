@@ -11,6 +11,15 @@ ini_set('display_errors', 1);
 require_once __DIR__ . '/config.php';
 $pdo = getDBConnection();
 
+// STEP 1 & 2: Prove key is loaded
+$currentKey = defined('OPENROUTER_API_KEY') ? OPENROUTER_API_KEY : 'NOT_DEFINED';
+$masked = (strlen($currentKey) > 10) ? substr($currentKey, 0, 8) . "..." : $currentKey;
+ragLog("SYSTEM START - API Key Status: " . $masked);
+
+if ($currentKey === 'NOT_DEFINED' || empty($currentKey)) {
+    ragLog("CRITICAL ERROR: OPENROUTER_API_KEY is missing or empty in web context.");
+}
+
 // Disable output buffering
 if (ob_get_level())
     ob_end_clean();

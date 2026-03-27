@@ -11,14 +11,14 @@ flowchart LR
     A[Utilisateur] --> B[Angular Frontend]
     B -->|Requête HTTP| C[API PHP]
     C --> D[(Base de Données)]
-    C --> E[IA Ollama]
+    C --> E[OpenRouter API]
     E --> C
     C -->|Réponse JSON| B
     B --> A
 ```
 
 **Explication simple :**
-L'utilisateur interagit avec Angular qui envoie les demandes au serveur PHP. Le serveur consulte la base de données et l'intelligence artificielle, puis renvoie le résultat à l'écran.
+L'utilisateur interagit avec Angular qui envoie les demandes au serveur PHP. Le serveur consulte la base de données et l'intelligence artificielle (via OpenRouter), puis renvoie le résultat à l'écran.
 
 ---
 
